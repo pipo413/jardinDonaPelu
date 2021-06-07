@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "sys": { "id": "1" },
+      "fields": {
+        "title": "AGLOMENA CRYSPUM",
+        "price": 10.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/AGLOMENA_CRYSPUM.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "2" },
+      "fields": {
+        "title": "king panel bed",
+        "price": 12.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/AGLOMENA_SILVER_QUEEN.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "3" },
+      "fields": {
+        "title": "ALOCASIA OREJA DE ELEFANTE VERDE",
+        "price": 12.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/ALOCASIA_OREJA_DE_ELEFANTE_VERDE.jpg " } } }
+      }
+    },
+    {
+      "sys": { "id": "4" },
+      "fields": {
+        "title": "ALOCASIA_POLLY",
+        "price": 22.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/ALOCASIA_POLLY1.JPG" } } }
+      }
+    },
+    {
+      "sys": { "id": "5" },
+      "fields": {
+        "title": "ARBOL_DE_JADE1",
+        "price": 88.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/ARBOL_DE_JADE1.JPG " } } }
+      }
+    },
+    {
+      "sys": { "id": "6" },
+      "fields": {
+        "title": "MARANTA_LEUCONERA",
+        "price": 32.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/MARANTA_LEUCONERA_1.JPG" } } }
+      }
+    },
+    {
+      "sys": { "id": "7" },
+      "fields": {
+        "title": "PILEA",
+        "price": 45.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/PILEA1.JPG" } } }
+      }
+    },
+    {
+      "sys": { "id": "8" },
+      "fields": {
+        "title": "POTUS",
+        "price": 33.99,
+        "image": { "fields": { "file": { "url": "./images/JardinPics/POTUS(1).jpg" } } }
+      }
+    }
+  ]
+}
