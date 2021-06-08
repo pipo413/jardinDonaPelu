@@ -14,13 +14,15 @@ const client = contentful.createClient({
 const cartBtn = document.querySelector(".cart-btn");
 const closeCartBtn = document.querySelector(".close-cart");
 const clearCartBtn = document.querySelector(".clear-cart");
+var sellCartBtn = document.querySelector(".whastapp-btn-sell");
+
 const cartDOM = document.querySelector(".cart");
 const cartOverlay = document.querySelector(".cart-overlay");
 const cartItems = document.querySelector(".cart-items");
 const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
-
+const phoneContact = 5493513722328
 
 
 //cart
@@ -34,15 +36,15 @@ class Products {
     async getProducts() {
         try {
 
-            let contentful = await client.getEntries({content_type:"jardinDonaPelu"}); //esto es de la API contentful
+            let contentful = await client.getEntries({ content_type: "jardinDonaPelu" }); //esto es de la API contentful
             console.log(contentful);
-            
+
             let result = await fetch("products.json")
             // return result
             let data = await result.json();
             let products = contentful.items;
             products = products.map(item => {
-                const { title, price } = item.fields;
+                const { title, clase, description, price, riego, cuidado, luz} = item.fields;
                 const { id } = item.sys;
                 const image = item.fields.image.fields.file.url;
                 return { title, price, id, image };
@@ -52,12 +54,15 @@ class Products {
             console.log(error);
 
         }
-
+        console.log(products);
     }
+    
 
 }
 
 // display products
+
+var totalSell = ""
 
 class UI {
     displayProducts(products) {
@@ -120,9 +125,18 @@ class UI {
             itemsTotal += item.amount
         })
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2))
-        cartItems.innerText = itemsTotal
+        cartItems.innerText = itemsTotal;
+        // set SellCart
+        totalSell = tempTotal
+        this.sellCart()
+
+
         // console.log(cartTotal, cartItems);
+
     }
+
+
+
     addCartItem(item) {
         const div = document.createElement('div')
         div.classList.add('cart-item')
@@ -161,7 +175,6 @@ class UI {
         // agregamos el boton para abrir el carrito
         cartBtn.addEventListener('click', this.showCart);
         closeCartBtn.addEventListener('click', this.hideCart);
-        
 
     }
     populate(cart) {
@@ -175,6 +188,17 @@ class UI {
             this.clearCart();
             // console.log("Clear cart");
         });
+
+        // buy cart button
+        // sellCartBtn.addEventListener('click', () =>{
+        //     this.sellCart(), 
+        //     console.log("sell button")
+        // });
+
+     
+            
+        
+
         // cart functionality
         cartContent.addEventListener('click', event => {
             // console.log(event.target);
@@ -247,7 +271,32 @@ class UI {
     getSingleButton(id) {
         return buttonsDOM.find(button => button.dataset.id === id)
     };
+
+    // // sell button 
+    sellCart() {
+        // debugger
+        let cartSells = cart.map(item => item.title);
+        let cartAmounts = cart.map(item => item.amount);
+        let Sellmessage = ""
+        console.log(cartSells);
+        console.log(cartAmounts);
+
+        for (let i = 0; i < cart.length; i++) {
+            
+            Sellmessage = Sellmessage+"%0A%20%20*%20"+cartSells[i]+"%20~%20Cantidad:%20"+cartAmounts[i]
+        }
+
+        // console.log(Sellmessage)
+        sellCartBtn.innerHTML = `<a target="_blank" href="https://wa.me/${phoneContact}?text=Solicitud%20de%20pedido:%0A${Sellmessage}%0A%0ATotal:%20${totalSell}">Solicitar</a`
+
+        // %0A -> salto de línea
+        
+    }
 }
+
+
+
+
 
 //local storage 
 
