@@ -1,3 +1,14 @@
+// contentful -> https://contentful.github.io/contentful.js/contentful/8.3.7/
+const client = contentful.createClient({
+    // This is the space ID. A space is like a project folder in Contentful terms
+    space: "z3bhzsm47g2t",
+    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+    accessToken: "mKknk0tmc0DLlISAXKVpvj11wg7m91FuhGijxt2yWv8"
+});
+
+
+
+
 //Seleccionando los elementos 
 
 const cartBtn = document.querySelector(".cart-btn");
@@ -22,10 +33,14 @@ let buttonsDOM = []
 class Products {
     async getProducts() {
         try {
+
+            let contentful = await client.getEntries({content_type:"jardinDonaPelu"}); //esto es de la API contentful
+            console.log(contentful);
+            
             let result = await fetch("products.json")
             // return result
             let data = await result.json();
-            let products = data.items;
+            let products = contentful.items;
             products = products.map(item => {
                 const { title, price } = item.fields;
                 const { id } = item.sys;
@@ -91,7 +106,7 @@ class UI {
                 // display cart item 
                 this.addCartItem(cartItem)
                 // show the cart 
-                this.showCart()
+                // this.showCart()
             })
 
             // console.log(id);
@@ -146,6 +161,7 @@ class UI {
         // agregamos el boton para abrir el carrito
         cartBtn.addEventListener('click', this.showCart);
         closeCartBtn.addEventListener('click', this.hideCart);
+        
 
     }
     populate(cart) {
@@ -188,11 +204,11 @@ class UI {
 
                 tempItem.amount = tempItem.amount - 1;
                 // si el item es = 0 no debería bajar más.
-                if(tempItem.amount > 0){
+                if (tempItem.amount > 0) {
                     Storage.saveCart(cart);
                     this.setCartValues(cart);
                     lowerAmount.previousElementSibling.innerText = tempItem.amount;
-                }else{
+                } else {
                     cartContent.removeChild(lowerAmount.parentElement.parentElement);
                     this.removeItem(id)
 
