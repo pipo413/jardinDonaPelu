@@ -22,6 +22,8 @@ const cartItems = document.querySelector(".cart-items");
 const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
+const ofertsDOM = document.querySelector(".offers-center");
+
 const phoneContact = 5493513722328
 
 
@@ -47,8 +49,9 @@ class Products {
                 const { title, clase, description, price, riego, cuidado, luz} = item.fields;
                 const { id } = item.sys;
                 const image = item.fields.image.fields.file.url;
-                return { title, price, id, image };
+                return { title, clase, description, price, riego, cuidado, luz, id, image };
             })
+            console.log(products);
             return products
         } catch (error) {
             console.log(error);
@@ -65,28 +68,62 @@ class Products {
 var totalSell = ""
 
 class UI {
+     
     displayProducts(products) {
-        let result = '';
+        
+        let productResult = '';
+        let offerResult = '';
+
         products.forEach(product => {
-            result += `
-        <!-- single products -->
-            <article class="product">
+            if (product.clase == "planta") {
+                
+                productResult += `
+                <!-- single products -->
+                <article class="product">
                 <div class="img-container">
-                    <img src=${product.image} alt="${product.title}" class="product-img">
-                    <button class="bag-btn" data-id=${product.id} >
-                        <i class="fas fa-cart-arrow-down"></i>
-                        Agregar a carrito
-                    </button>
+                <img src=${product.image} alt="${product.title}" class="product-img">
+                <button class="bag-btn" data-id=${product.id} >
+                <i class="fas fa-cart-arrow-down"></i>
+                Agregar a carrito
+                </button>
                 </div>
                 <h3>${product.title} </h3>
                 <h4>$${product.price} </h4>
-            </article>
-        <!-- End of single products -->
+                </article>
+                <!-- End of single products -->
+                
+                `
+                
+            }else if (product.clase == "oferta") {
+                offerResult += `
+                <!-- single products -->
+                    <article class="product">
+                    <div class="ribbon-wrapper">
+                        <div class="ribbon">OFF</div>
+                    </div>
+                    <div class="img-container">
+                        <img src="${product.image}" alt="${product.title}" class="product-img" />
+                        <button class="bag-btn" data-id="${product.id}">
+                        <i class="fas fa-cart-arrow-down"></i>
+                        Agregar a carrito
+                        </button>
+                    </div>
+                    <h3>${product.title}</h3>
+                    <h4>$${product.price}</h4>
+                    </article>
+                    <!-- End of single products -->
+                
+                `
+                
 
-        `
-        });
-        productsDOM.innerHTML = result;
-    }
+            }
+            }
+            );
+            productsDOM.innerHTML = productResult;
+            ofertsDOM.innerHTML = offerResult;
+            
+        }
+    
     getBagButton() {
         const buttons = [...document.querySelectorAll(".bag-btn")]
         buttonsDOM = buttons;
