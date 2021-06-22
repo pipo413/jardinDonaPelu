@@ -45,19 +45,21 @@ class Products {
             // return result
             let data = await result.json();
             let products = contentful.items;
+            // debugger
             products = products.map(item => {
                 const { title, clase, description, price, riego, cuidado, luz} = item.fields;
                 const { id } = item.sys;
-                const image = item.fields.image.fields.file.url;
+                const image = item.fields.image.map((item)=>item.fields.file.url)
                 return { title, clase, description, price, riego, cuidado, luz, id, image };
-            })
+            });
+
             console.log(products);
             return products
-        } catch (error) {
-            console.log(error);
-
-        }
-        console.log(products);
+            } catch (error) {
+                console.log(error);
+                
+            }
+            // console.log(products);
     }
     
 
@@ -81,7 +83,7 @@ class UI {
                 <!-- single products -->
                 <article class="product">
                 <div class="img-container">
-                <img src=${product.image} alt="${product.title}" class="product-img">
+                <img src=${product.image[0]} alt="${product.title}" class="product-img">
                 <button class="bag-btn" data-id=${product.id} >
                 <i class="fas fa-cart-arrow-down"></i>
                 Agregar a carrito
@@ -102,7 +104,7 @@ class UI {
                         <div class="ribbon">OFF</div>
                     </div>
                     <div class="img-container">
-                        <img src="${product.image}" alt="${product.title}" class="product-img" />
+                        <img src="${product.image[0]}" alt="${product.title}" class="product-img" />
                         <button class="bag-btn" data-id="${product.id}">
                         <i class="fas fa-cart-arrow-down"></i>
                         Agregar a carrito
