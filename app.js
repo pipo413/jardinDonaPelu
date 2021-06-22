@@ -23,8 +23,9 @@ const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
 const ofertsDOM = document.querySelector(".offers-center");
+const contacts = document.querySelector(".social")
 
-const phoneContact = 5493513722328
+const phoneContact = 5493516233355
 
 
 //cart
@@ -123,9 +124,10 @@ class UI {
             );
             productsDOM.innerHTML = productResult;
             ofertsDOM.innerHTML = offerResult;
+            contacts.innerHTML = `<a href="https://www.instagram.com/eljardindedonapelu/"><i class="fab fa-instagram"></i></a>
+            <a target="_blank" href="https://wa.me/${phoneContact}?text=""><i class="fab fa-whatsapp"></i></a>`
             
         }
-    
     getBagButton() {
         const buttons = [...document.querySelectorAll(".bag-btn")]
         buttonsDOM = buttons;
@@ -180,7 +182,7 @@ class UI {
         const div = document.createElement('div')
         div.classList.add('cart-item')
         div.innerHTML = `
-        <img src="${item.image}"
+        <img src="${item.image[0]}"
               alt="${item.title}"
             />
             <div>
@@ -326,7 +328,7 @@ class UI {
         }
 
         // console.log(Sellmessage)
-        sellCartBtn.innerHTML = `<a target="_blank" href="https://wa.me/${phoneContact}?text=Solicitud%20de%20pedido:%0A${Sellmessage}%0A%0ATotal:%20${totalSell}">Solicitar</a`
+        sellCartBtn.innerHTML = `<a target="_blank" href="https://wa.me/${phoneContact}?text=Solicitud%20de%20pedido:%0A${Sellmessage}%0A%0ATotal:$%20${totalSell}">Solicitar</a>`
 
         // %0A -> salto de línea
         
