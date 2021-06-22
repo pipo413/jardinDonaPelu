@@ -328,7 +328,7 @@ class UI {
         }
 
         // console.log(Sellmessage)
-        sellCartBtn.innerHTML = `<a target="_blank" href="https://wa.me/${phoneContact}?text=Solicitud%20de%20pedido:%0A${Sellmessage}%0A%0ATotal:$%20${totalSell}">Solicitar</a>`
+        sellCartBtn.innerHTML = `<a target="_blank" href="https://wa.me/${phoneContact}?text=Hola!%20Queria%20solicitar:%0A${Sellmessage}%0A%0ATotal:$%20${totalSell}">Solicitar</a>`
 
         // %0A -> salto de línea
         
